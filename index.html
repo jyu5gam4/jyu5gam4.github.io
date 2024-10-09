@@ -191,8 +191,14 @@
       100% { background-color: #ff3366; }
     }
     .ascii-draw {
-            white-space: pre; /*structure */
-            text-align: center; /* c */
+            font-family: "Courier New", Courier, monospace; /* Monospace font only for ASCII art */
+            white-space: pre; /* Ensures the ASCII art maintains its structure */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Centers vertically */
+            text-align: center; /* Centers horizontally */
+            background-color: #f0f0f0;
     .button-3d {
       padding: 10px 20px;
       border: 2px solid #ff00ff;
@@ -255,7 +261,7 @@
     / \   / \   / \<br>
     
    The ball keeps bouncing!
--->
+
 
   <h1 class="fluctuating">jyu5_gam4 | intuitive gaming</h1>
 <img src="jg0004.png" alt="game">
@@ -360,7 +366,7 @@ Future development aims to expand the game across platforms, introduce multiplay
 <img src="jg0007.png" alt="game"><img src="jg0006.png" alt="game"><img src="jg0008.png" alt="game"><img src="jg0009.png" alt="game">
 
 <div class="ascii-draw">
-   <pre>
+   
                       Autonomic Nervous System
                                ||
               ------------------------------------------
@@ -376,7 +382,7 @@ Heart: Increases heart rate     Lungs:   Heart: Decreases heart rate     Lungs:
                                 Dilates airways                        Constricts airways
                                    |                                        |
 Digestive Tract: Reduces activity   Digestive Tract: Stimulates digestion
-        </pre>
+        
 </div>
 </body>
 <!--
