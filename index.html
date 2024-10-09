@@ -1,168 +1,362 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Senso: Feel the Game, Play the Art</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+   ________||________
+  /       _______     \
+ /   o   |       |  o  \
+/   ____ |       | ____ \
+|  |    ||       ||    | |
+|  |____||_______||____| |
+|                       |
+ \   o    o   o   o    o /
+  \_____________________/
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>jyu5_gam4 | intuitive gaming</title>
   <style>
     body {
-      font-family: "Comic Sans MS", cursive, sans-serif;
-      background-color: #ffdd57;
-      color: #000;
-      line-height: 1.6;
+      background-color: black;
+      color: white;
+      font-family: 'Courier New', Courier, monospace;
       margin: 0;
-      padding: 20px;
-      animation: bg-change 5s infinite alternate;
-    }
-    a {
-      color: #ff0000;
-      text-decoration: none;
-      animation: link-color 2s infinite alternate;
-      font-weight: bold;
-      font-size: 1.2em;
+      padding: 0;
     }
     h1 {
+      text-align: center;
       color: #ff00ff;
-      text-shadow: 3px 3px #00ff00;
-      animation: text-color-change 3s infinite alternate;
-      font-family: "Impact", fantasy;
+      font-size: 3em;
+      text-shadow: 2px 2px #00ff00, 4px 4px #ff00ff, 6px 6px #00ffff;
+      animation: colorChange 3s infinite alternate;
     }
-    h2 {
-      color: #ff0000;
-      text-shadow: 1px 1px #0000ff;
-      animation: text-color-change-2 4s infinite alternate;
-      font-family: "Times New Roman", serif;
-      font-size: 1.8em;
+    @keyframes colorChange {
+      from { color: #ff00ff; }
+      to { color: #00ff00; }
     }
-    hr {
-      border: 5px double #ff00ff;
-      animation: hr-width 3s infinite alternate;
+    .fluctuating {
+      animation: textFluctuate 5s infinite alternate;
     }
-    .section {
-      margin: 30px 0;
-      padding: 20px;
-      border: 4px groove #ff0000;
-      background-color: #e0ffff;
-      animation: section-bg-change 4s infinite alternate;
-      font-family: "Arial", sans-serif;
-      font-size: 1.1em;
-    }
-    .leet {
-      font-family: "Courier New", Courier, monospace;
-      color: #00ff00;
-      background-color: #000;
-      padding: 5px;
-      display: inline-block;
-      animation: leet-flash 2s infinite alternate;
-      font-size: 1.3em;
-    }
-    @keyframes bg-change {
-      0% { background-color: #ffdd57; }
-      25% { background-color: #ff9999; }
-      50% { background-color: #99ff99; }
-      75% { background-color: #9999ff; }
-      100% { background-color: #ffdd57; }
-    }
-    @keyframes link-color {
-      0% { color: #ff0000; }
-      50% { color: #00ff00; }
-      100% { color: #0000ff; }
-    }
-    @keyframes text-color-change {
-      0% { color: #ff00ff; }
+    @keyframes textFluctuate {
+      0% { color: #ffcc00; }
+      25% { color: #ff00ff; }
       50% { color: #00ffff; }
-      100% { color: #ff8800; }
+      75% { color: #ff3366; }
+      100% { color: #ccff33; }
     }
-    @keyframes text-color-change-2 {
-      0% { color: #ff0000; }
-      50% { color: #0000ff; }
-      100% { color: #008000; }
+    .big-text {
+      font-size: 1.5em;
+      color: #ffff00;
     }
-    @keyframes hr-width {
-      from { width: 50%; }
-      to { width: 90%; }
+    .small-text {
+      font-size: 1.0em;
+      color: #ff6600;
     }
-    @keyframes section-bg-change {
-      0% { background-color: #e0ffff; }
-      50% { background-color: #ffe0e0; }
-      100% { background-color: #e0ffe0; }
+    .super-text {
+      font-size: 3em;
+      background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow 6s linear infinite;
     }
-    @keyframes leet-flash {
-      0% { background-color: #000; color: #00ff00; }
-      50% { background-color: #ff00ff; color: #ffff00; }
-      100% { background-color: #0000ff; color: #ffffff; }
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2em;
-      }
-      h2 {
-        font-size: 1.5em;
-      }
-      body {
-        padding: 10px;
-      }
-      .section {
-        margin: 15px 0;
-      }
+    .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+    }
+    /* Animated Line Styles */
+    .pulsing-line {
+      border-top: 3px solid #ff0066;
+      width: 100%;
+      animation: pulseLine 1.5s infinite;
+    }
+    @keyframes pulseLine {
+      0% { border-top-color: #ff0066; }
+      50% { border-top-color: #66ff00; }
+      100% { border-top-color: #ff0066; }
+    }
+    .dashed-line {
+      border-top: 3px dashed #00ccff;
+      width: 100%;
+      animation: dashMove 3s linear infinite;
+    }
+    @keyframes dashMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 100px 0; }
+    }
+    .growing-line {
+      width: 0;
+      height: 3px;
+      background-color: #ff3300;
+      animation: growLine 30s ease-out forwards;
+    }
+    @keyframes growLine {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    .zigzag-line {
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(135deg, #ffcc00 25%, transparent 25%) -50px 0,
+                  linear-gradient(45deg, #ffcc00 25%, transparent 25%) -50px 0;
+      background-size: 50px 50px;
+      animation: zigzag 4s linear infinite;
+    }
+    @keyframes zigzag {
+      from { background-position: 0 0; }
+      to { background-position: 50px 50px; }
+    }
+    .glowing-line {
+      border-top: 2px solid #ffffff;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .glowing-line::before {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 100%;
+      width: 100px;
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+      animation: glowingMove 3s linear infinite;
+    }
+    @keyframes glowingMove {
+      from { left: -100px; }
+      to { left: 100%; }
+    }
+    .wave-line {
+      border-top: 2px solid #ff0066;
+      width: 100%;
+      animation: wave 2s ease-in-out infinite;
+    }
+    @keyframes wave {
+      0%, 100% { transform: scaleX(1); }
+      50% { transform: scaleX(1.5); }
+    }
+    .animate-line {
+      border-top: 2px solid #ff00ff;
+      width: 100%;
+      animation: moveLine 4s infinite alternate;
+    }
+    @keyframes moveLine {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(100%); }
+    }
+    
+    /* New retro styles */
+    .glowing-box {
+      border: 2px solid #ff00ff;
+      animation: glow 1.5s infinite alternate;
+    }
+    @keyframes glow {
+      0% { border-color: #ff00ff; }
+      100% { border-color: #00ff00; }
+    }
+    
+    a {
+      text-decoration: underline;
+      animation: blink 0.7s infinite;
+    }
+    @keyframes blink {
+      0% { text-decoration-color: #ff00ff; }
+      50% { text-decoration-color: #00ff00; }
+      100% { text-decoration-color: #ff00ff; }
+    }
+    
+    .blinking-banner {
+      width: 100%;
+      background-color: #ff3366;
+      animation: bannerFlash 2s infinite;
+      padding: 10px;
+      text-align: center;
+    }
+    @keyframes bannerFlash {
+      0% { background-color: #ff3366; }
+      50% { background-color: #ffcc33; }
+      100% { background-color: #ff3366; }
+    }
+    
+    .button-3d {
+      padding: 10px 20px;
+      border: 2px solid #ff00ff;
+      background-color: #cc00cc;
+      box-shadow: 4px 4px #660066;
+      color: white;
+      cursor: pointer;
+    }
+    .button-3d:hover {
+      box-shadow: 2px 2px #660066;
+      transform: translate(2px, 2px);
+    }
+    
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      background-color: #ff00ff;
+      border: 2px solid #00ff00;
+      appearance: none;
+      cursor: pointer;
+    }
+    input[type="checkbox"]:checked {
+      background-color: #00ff00;
+    }
+    
+    .pop-on-click:active {
+      transform: scale(1.2);
+    }
+    
+    .rainbow-text {
+      background: linear-gradient(90deg, #ff00ff, #00ff00, #00ffff, #ffcc00);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 80%;
+      margin: 20px auto;
+    }
+
+    th, td {
+      border: 2px solid #ff00ff;
+      padding: 10px;
+      text-align: center;
+      color: #00ff00;
+    }
+
+    th {
+      background-color: #660066;
     }
   </style>
 </head>
 <body>
-  <h1>Senso: Feel the Game, Play the Art</h1>
-  <h2><b>Senso: Sinta o Jogo, Jogue a Arte</b></h2>
-  <div class="section">
-    <p>Discover Senso, a surreal playground where every surface and object is a living work of art. In Senso, there are no strict rules&mdash;just the freedom to explore, touch, and have fun without limits.</p>
-    <p><b>Entre em um playground surreal, onde cada superfície e objeto é uma obra de arte viva. Em Senso, não há regras rígidas&mdash;só a liberdade de explorar, tocar e se divertir sem limites.</b></p>
+
+     O     O     O
+    /|\   /|\   /|\
+    / \   / \   / \
+    
+   The ball keeps bouncing!
+-->
+
+  <h1 class="fluctuating">jyu5_gam4 | intuitive gaming</h1>
+
+  <p class="big-text fluctuating">Imagine a billiard table filled with ringing balls, soccer nets, and a painted grass field. <br> 
+jyu5_gam4 is a sports arena that breaks free from conventional gaming offering a tactile sandbox where sensory exploration invites users to experience the connection between their physical and digital bodies while engaging with fluid, painted landscapes. The game's pace is guided by the player's sense of discovery. Interactions offer not points, but musical notes, squishes, squashes, fuzzes, wiggles, and giggles. Through auditory and visual stimuli, the game provokes physical reactions of relaxation and flow, challenging players to tune into subtle changes in their balance, muscle tension, and posture. Proprioception - the body's awareness in space - is central to the gameplay, inviting players to touch without touching and move without moving.
+</p>
+  
+  <div class="pulsing-line"></div>
+
+  <p class="small-text">Centered around intuitive, physics-based interactions, players use simple hand, eye-tracking, or mouse controls to navigate an air hockey paddle in changing fields that fuse elements from various sports like golf, basketball, soccer, ping pong, and foosba, sinking into pools of paint, traversing grassy fields, or descending steeply on skatepark concrete. Each surface offers unique physics and tactile feedback, with mass and gravity creating surprising interactions. Players might experience lightness on one platform and heaviness on another, constantly adapting to the changing environment.
+Visually, every object features pictorial imperfections that heighten the game's tactile feel. Hand-painted elements, scanned in high resolution, create vivid, textured surfaces that contrast with typical digital graphics. Unfinished canvases, floating brushstrokes, and dynamic color palettes transform the game into an immersive digital canvas. Lighting and shading enhance depth, creating a visual experience that shifts from soft and ethereal to bold and striking, resulting in a chaotic but cozy environment.
+The goal is not to win or lose but to enter a state of flow that brings presence and pleasure, emphasizing the joy of movement and sensory exploration. It's not about the virtuosity of painting but the creaminess of the act of painting and perception of the pictorial surface.
+Future development aims to expand the game across platforms, introduce multiplayer mode, and refine the sound design. The sophisticated soundtrack will flourish from object interactions, positioning the player as a real-time composer in a funny noise-orchestra, where sound effects form the score to an interactive soundscape.
+</p>
+
+  <div class="dashed-line"></div>
+
+  <div class="center-container">
+    <p class="super-text">預感</p></div>
+
+ <div class="center-container">
+  <p class="small-text fluctuating">presage / sensation</p>
+</div>
+ 
+
+  
+  
+  <div class="growing-line"></div>
+
+  <table>
+    <tr>
+      <th>Game Element</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>** SENSORIAL ARENA **</td>
+      <td>
+
+       ______________________<br>
+      /                      \<br>
+     /     o     o     o       \<br>
+    /      _____________        \<br>
+   |      |             |        |<br>
+   |      |    \   /    |        |<br>
+   |      |   -- O --   |        |<br>
+   |      |    /   \    |        |<br>
+    \     |_____________|       /<br>
+     \     o     o     o       /<br>
+      \______________________/<br>
+
+</td>
+    </tr>
+    <tr>
+      <td>Proprioception</td>
+      <td>Players interact by tuning into their sense of body awareness in space.</td>
+    </tr>
+    <tr>
+      <td>You Sound Design</td>
+      <td>Dynamic, interactive musical soundscape created by you in game object interactions.</td>
+    </tr>
+  </table>
+
+  <div class="zigzag-line"></div>
+
+  <p class="small-text">intuitive movement</p>
+
+  <div class="glowing-line"></div>
+<div class="center-container">
+  <p class="small-text">physics deterioration</p></div>
+
+  <div class="wave-line"></div>
+
+  
+  <div class="animate-line"></div>
+
+  <!-- not a game -->
+  <div class="glowing-box" style="padding: 20px; margin: 20px 0;">
+    <p align="center">Any(body) can play this.</p>
   </div>
-  <div class="section">
-    <h2>Play the Alpha Version Now and Experience Senso Firsthand!</h2>
-    <h2><b>Jogue a Versão Alfa Agora e Experimente Senso em Primeira Mão!</b></h2>
+
+  <marquee>Goals without goals!</marquee>
+
+  <p>Check out our <a href="https://www.instagram.com/jyu5_gam4/">pictures platform account</a> for extra content!</p>
+ <p align="center"> <button class="button-3d">touch</button></p>
+
+  <div class="blinking-banner">
+    see
   </div>
-  <hr>
-  <div class="section">
-    <h2>Break the Rules, Feel the Flow</h2>
-    <h2><b>Rompa as Regras, Sinta o Fluxo</b></h2>
-    <p>Forget conventional sports games. Senso is about pure interaction and experimentation. No goals, no strict rules&mdash;just you, the art, and movement.</p>
-    <p><b>Esqueça os jogos de esporte convencionais. Senso é sobre interação pura e experimentação. Sem gols, sem regras rígidas&mdash;apenas você, a arte e o movimento.</b></p>
+
+<p align="center"><button class="button-3d">feel</button></p>
+
+  <div style="margin: 20px 0;">
+    <input type="checkbox" id="fake-checkbox">
+    <label for="fake-checkbox">Click the checkbox and we won't reply.</label>
   </div>
-  <div class="section">
-    <h2>A Unique Sensory Experience</h2>
-    <h2><b>Uma Experiência Sensorial Única</b></h2>
-    <p>Touch, feel, explore. Every object is hand-painted, bringing a unique tactile quality. With fluid gravity and surreal landscapes, every movement is an invitation to discovery.</p>
-    <p><b>Toque, sinta, explore. Cada objeto foi pintado à mão, trazendo uma qualidade tátil única. Com gravidade fluida e paisagens surreais, cada movimento é um convite à descoberta.</b></p>
+
+  <div class="pop-on-click" style="background-color: #ff00ff; padding: 10px; display: inline-block; cursor: pointer;">
+    Pop!
   </div>
-  <div class="section">
-    <h2>Your Playground, Your Journey</h2>
-    <h2><b>Seu Playground, Sua Jornada</b></h2>
-    <p>Navigate a world of painted textures and surreal obstacles with simple, intuitive controls. Glide across smooth surfaces or explore how objects react in weightless environments. Senso is a sandbox for your imagination&mdash;explore freely, experiment with physics, and create your own experience.</p>
-    <p><b>Navegue por um mundo de texturas pintadas e obstáculos surreais com controles simples e intuitivos. Deslize por superfícies suaves ou explore como objetos reagem em ambientes sem gravidade. Senso é um sandbox para sua imaginação&mdash;explore livremente, experimente com a física e crie sua própria experiência.</b></p>
-  </div>
-  <div class="section">
-    <h2>Art in Motion</h2>
-    <h2><b>Arte em Movimento</b></h2>
-    <p>Senso's visuals are a fusion of painting and digital landscapes, combining the tactile feel of hand-painted objects with the smooth flow of a digital world. Each element is part of a living canvas, with shadows, textures, and colors blending into an immersive experience. This is a game that stands out for its unique look, feel, and sound.</p>
-    <p><b>Os visuais de Senso são uma fusão entre pintura e paisagens digitais, combinando o toque tátil de objetos pintados à mão com o fluxo suave de um mundo digital. Cada elemento faz parte de uma tela viva, com sombras, texturas e cores se misturando em uma experiência imersiva. Este é um jogo que se destaca pela sua aparência, sensação e som únicos.</b></p>
-  </div>
-  <div class="section">
-    <h2>Next-Level Fun</h2>
-    <h2><b>Diversão Fora da Curva</b></h2>
-    <p>We are constantly expanding the world of Senso. Multiplayer modes, new levels, and enhanced sound design are on the way.</p>
-    <p><b>Estamos constantemente expandindo o mundo de Senso. Modos multiplayer, novos níveis e design sonoro aprimorado estão a caminho.</b></p>
-  </div>
-  <div class="section">
-    <h2>Why Senso is Pure Fire</h2>
-    <h2><b>Por Que Senso É Puro Fogo</b></h2>
-    <ul>
-      <li class="leet">F33l 3v3ry 1nt3ract10n: Hand-painted objects with textures that evoke a synesthesia that transcends the visual.</li>
-      <li><b>Sinta Cada Interação:</b> Objetos pintados à mão, com texturas que evocam uma sinestesia que transcende o visual.</li>
-      <li class="leet">Gr4v1ty Und3r Y0ur C0ntr0l: The laws of physics bend and change, creating a sense of disorientation as the rules shift.</li>
-      <li><b>Gravidade Sob Seu Controle:</b> As regras da física se dobram e mudam, criando uma sensação de desorientação enquanto as regras se transformam.</li>
-      <li class="leet">A Crunchy S3ns0ry Playgr0und: Senso is a delight for the senses&mdash;visual, tactile, and auditory.</li>
-      <li><b>Playground Sensorial Crocante:</b> Senso é um deleite para os sentidos&mdash;visual, tátil e auditivo.</li>
-      <li class="leet">3v3ry0ne 1s W3lc0me: Designed for players of all abilities, Senso is for everyone.</li>
-      <li><b>Todos São Bem-vindos:</b> Projetado para jogadores de todas as habilidades, Senso é para todos.</li>
-    </ul>
-  </div>
+
+  <p class="rainbow-text">explore the connection between your physical and digital body</p>
+
 </body>
+<!--
+    ________
+   /        \
+  /    <>    \
+ /___________\
+
+Enter the portal!
+-->
+
 </html>
