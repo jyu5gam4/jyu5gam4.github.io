@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Texto Ondulado com Variação Aleatória e Arte ASCII</title>
+  <title>Texto Ondulado com Variação Aleatória e Arte ASCII Animada</title>
   <style>
     * {
       margin: 0;
@@ -28,8 +28,14 @@
       white-space: pre-wrap;
       width: 100%; /* Largura inicial */
       transition: width 5s ease-in-out; /* Animação suave */
+      font-size: 1.5em; /* Tamanho maior da fonte */
       font-weight: bold; /* Texto em negrito */
-      border: 2px solid red; /* Borda vermelha */
+      color: #FFA500; /* Amarelo alaranjado */
+      text-shadow: 
+        1px 1px 0 red, 
+        -1px 1px 0 red, 
+        1px -1px 0 red, 
+        -1px -1px 0 red; /* Contorno vermelho */
       padding: 10px;
     }
 
@@ -37,6 +43,8 @@
       color: #FFF; /* Cor branca para a arte ASCII */
       margin-top: 20px;
       white-space: pre; /* Mantém os espaços da arte ASCII */
+      font-size: 1em;
+      transition: transform 0.1s ease-in-out;
     }
   </style>
 </head>
@@ -50,7 +58,7 @@
     ~~~~ ~~~~~~~~ STANDING WAVES ~~~~~ ~~~~~~ ~~~~~~
   </div>
 
-  <div class="ascii-art">
+  <div class="ascii-art" id="asciiArt">
       ``````                                         ~                   
      ``      ```                                       ~                   
      `         ```                                     ~                   
@@ -88,9 +96,20 @@
       textContainer.style.width = randomWidth + '%';
     }
 
+    function animateAsciiArt() {
+      const asciiArt = document.getElementById('asciiArt');
+      // Oscila a arte ASCII levemente para criar um efeito de vibração
+      const randomX = Math.random() * 2 - 1; // Valor aleatório entre -1 e 1
+      const randomY = Math.random() * 2 - 1; // Valor aleatório entre -1 e 1
+      asciiArt.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+
     // Chama a função inicialmente e a cada 5 segundos
     changeWidth();
     setInterval(changeWidth, 5000);
+
+    // Chama a animação da arte ASCII a cada 100ms
+    setInterval(animateAsciiArt, 100);
   </script>
 </body>
 </html>
