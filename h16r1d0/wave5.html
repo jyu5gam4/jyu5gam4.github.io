@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Texto Ondulado com Variação Aleatória e Arte ASCII</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000; /* Fundo preto */
+      font-family: monospace;
+      color: #FFA500; /* Amarelo alaranjado */
+    }
+
+    .text-container {
+      overflow: hidden;
+      white-space: pre-wrap;
+      width: 100%; /* Largura inicial */
+      transition: width 5s ease-in-out; /* Animação suave */
+      font-weight: bold; /* Texto em negrito */
+      border: 2px solid red; /* Borda vermelha */
+      padding: 10px;
+    }
+
+    .ascii-art {
+      color: #FFF; /* Cor branca para a arte ASCII */
+      margin-top: 20px;
+      white-space: pre; /* Mantém os espaços da arte ASCII */
+    }
+  </style>
+</head>
+<body>
+  <div class="text-container" id="text">
+    ~~~~~~~~~~ ~~~~ VIBRATION ~~~~ ~~~~ ~~~~ ~~~~~~~~ ~~~~~~~~~~ ~~~~ ~~~~ 
+    ~~~~ ~~~~~~~ ~~~~ ~~~~~~ ~~~ RESONANCE ~~~~ ~~~~ ~~~~~~~ ~~~~~~~ ~~~~ 
+    WAVES ~~~~~~ ~~~~ ~~~~ ~~~ INNER EAR ~~~~~~ ~~~~~ ~~~~~ ~~~~~~~ ~~~~~ 
+    ~~~~~~~~ ~~~~~~~~ ~~~~~~ ~~~~~ MISMATCH ~~~~~~ ~~~~ ~~~~ ~~~~ ~~~~~~ 
+    ~~~~~~ PIEZOELECTRIC ~~~~~~ ~~~~~ EFFECTS ~~~~~~~~~ ~~~~~~ ~~~~ ~~~~ 
+    ~~~~ ~~~~~~~~ STANDING WAVES ~~~~~ ~~~~~~ ~~~~~~
+  </div>
+
+  <div class="ascii-art">
+      ``````                                         ~                   
+     ``      ```                                       ~                   
+     `         ```                                     ~                   
+     `  The Hum ``                                     ~                   
+      ```      ``                          ~           ~                   
+         ```````                          ~~           ~                   
+      `````                              ~~            ~                   
+    ```                                  ~           ~~~                   
+    `   persistent low-frequency auditory~phenomenon~~                     
+    ``                                  ~~                                 
+     ```````       auditoryscortex~~~~~~~                                  
+           `````````                                                       
+               ````````````````````````     ``````````                     
+           ````                       ```````        ````                  
+          ``   ┌────────────────────────────────────────``────────────────┐
+          ``   │anomalous interactions     ┌──────────────────────────────┐
+           `   │                           │localized resonant structures │
+┌──────────`──────────────┐────────────────└▲──┬──────────────────────────┘
+│infrasonic standing waves│  ────┬──┬─┬─────┘  │                           
+└─────────────────────────◄──────┼──┼─┼────────┘                           
+                                 │  │ │                                    
+                      ┬──────────     │ ────┐                              
+                      │neural phase-locking │                              
+                      └──         ┌─── ──── │                              
+                                  │         │                              
+                                 persistent perception of                  
+                                 non-externalized sound sources             
+  </div>
+
+  <script>
+    function changeWidth() {
+      const textContainer = document.getElementById('text');
+      // Gera uma largura aleatória entre 20% e 50%
+      const randomWidth = Math.floor(Math.random() * (50 - 20 + 1)) + 20;
+      textContainer.style.width = randomWidth + '%';
+    }
+
+    // Chama a função inicialmente e a cada 5 segundos
+    changeWidth();
+    setInterval(changeWidth, 5000);
+  </script>
+</body>
+</html>
