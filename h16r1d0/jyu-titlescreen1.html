@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JYU5 GAM4</title> <!-- Mudei o título da página também -->
+    <title>JYU5 GAM4</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
 
@@ -10,7 +10,7 @@
             text-shadow: 0 0 5px #fff,
                          0 0 10px #fff,
                          0 0 15px #0ff,
-                         0 0 20k #0ff !important;
+                         0 0 20px #0ff !important;
             animation: surge 1s infinite !important;
             font-size: 32px;
         }
@@ -39,10 +39,11 @@
             overflow-wrap: break-word;
             word-wrap: break-word;
             position: relative;
-            overflow: hidden;  /* Impede qualquer overflow */
+            overflow: hidden;
         }
 
-        body::before {
+        /* Removemos o fundo escurecido */
+        /* body::before {
             content: '';
             position: fixed;
             top: 0;
@@ -51,7 +52,7 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
             z-index: 1;
-        }
+        } */
 
         body > * {
             position: relative;
@@ -60,14 +61,14 @@
 
         .logo {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px; /* Ajustado para diminuir o espaço */
         }
 
         h1 {
             font-size: 64px;
-            margin: 5px 0;
+            margin: 0; /* Removido o espaço extra */
             text-align: center;
-            line-height: 0.8;
+            line-height: 0.8; /* Mantém as linhas próximas */
         }
 
         .content {
@@ -84,8 +85,8 @@
             50% { 
                 text-shadow: 0 0 10px #fff,
                             0 0 20px #fff,
-                            0 0 30k #0ff,
-                            0 0 40k #0ff; 
+                            0 0 30px #0ff,
+                            0 0 40px #0ff; 
             }
         }
     </style>
