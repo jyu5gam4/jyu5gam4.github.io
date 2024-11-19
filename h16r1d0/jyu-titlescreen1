@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JYU5 GAM4</title> <!-- Mudei o título da página também -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
+
+        * {
+            color: #fff !important;
+            text-shadow: 0 0 5px #fff,
+                         0 0 10px #fff,
+                         0 0 15px #0ff,
+                         0 0 20k #0ff !important;
+            animation: surge 1s infinite !important;
+            font-size: 32px;
+        }
+
+        img {
+            display: none;  /* Esconde qualquer imagem placeholder */
+        }
+
+        body {
+            background-image: url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: black;
+            font-family: monospace;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            white-space: pre-wrap;
+            line-height: 1.0;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            position: relative;
+            overflow: hidden;  /* Impede qualquer overflow */
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        body > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 64px;
+            margin: 5px 0;
+            text-align: center;
+            line-height: 0.8;
+        }
+
+        .content {
+            margin-top: 40px;
+        }
+
+        @keyframes surge {
+            0%, 100% { 
+                text-shadow: 0 0 5px #fff,
+                            0 0 10px #fff,
+                            0 0 15px #0ff,
+                            0 0 20px #0ff; 
+            }
+            50% { 
+                text-shadow: 0 0 10px #fff,
+                            0 0 20px #fff,
+                            0 0 30k #0ff,
+                            0 0 40k #0ff; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <h1>JYU5</h1>
+        <h1>GAM4</h1>
+    </div>
+    
+    <div class="content">
+        [Conteúdo ASCII aqui]
+    </div>
+</body>
+</html>
