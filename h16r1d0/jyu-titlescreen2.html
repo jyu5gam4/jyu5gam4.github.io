@@ -48,10 +48,9 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100px; /* Ajuste o tamanho conforme necessário */
+            width: 100px;
             height: auto;
-            animation: rotate 5s linear infinite; /* Faz a imagem girar */
+            animation: rotate 5s linear infinite;
         }
 
         h1 {
@@ -63,14 +62,16 @@
             z-index: 2; /* Mantém o texto acima da imagem */
         }
 
-        @keyframes rotate {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
+
+            @keyframes rotate {
+                from {
+                    transform: translate(-50%, -50%) rotate(0deg);
+                }
+                to {
+                    transform: translate(-50%, -50%) rotate(360deg);
+                }
             }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
-        }
+        
 
         @keyframes surge {
             0%, 100% { 
