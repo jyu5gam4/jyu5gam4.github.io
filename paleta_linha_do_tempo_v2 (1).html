@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paleta histórica interativa</title>
+<style>
+  :root{
+    --bg:#f3efe8; --panel:#fffdf9; --text:#191714; --muted:#746f68; --line:#c9c1b7;
+    --accent:#1d1b18; --future:#ded9d1; --shadow:0 10px 30px rgba(35,29,21,.09);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  main{max-width:1180px;margin:auto;padding:20px}
+  h1{font-size:clamp(24px,4vw,42px);line-height:1.05;margin:0 0 8px}
+  .sub{margin:0 0 20px;color:var(--muted);max-width:830px}
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;align-items:start}
+  .surface{background:var(--panel);border:1px solid #d8d1c8;border-radius:18px;padding:16px;box-shadow:var(--shadow)}
+  .palette-wrap{overflow-x:auto;padding-bottom:4px}
+  .palette{display:grid;grid-template-columns:repeat(8,minmax(82px,1fr));gap:7px;min-width:760px}
+  .cell{position:relative;aspect-ratio:1.08;border-radius:10px;border:1px solid rgba(0,0,0,.15);overflow:hidden;transition:opacity .25s,transform .25s,filter .25s,box-shadow .25s}
+  .cell.empty{background:transparent;border:1px dashed #ded8cf}
+  .cell.color{background:var(--swatch);color:var(--label,#111)}
+  .cell.future{opacity:.12;filter:grayscale(1)}
+  .cell.past{opacity:.76}
+  .cell.current{opacity:1;transform:translateY(-2px);box-shadow:0 0 0 3px rgba(25,23,20,.85),0 8px 18px rgba(0,0,0,.17);z-index:2}
+  .cell .coord{position:absolute;top:6px;left:7px;font-size:10px;font-weight:700;opacity:.7}
+  .cell .name{position:absolute;inset:auto 6px 6px 6px;font-size:11px;line-height:1.08;text-wrap:balance;text-shadow:0 1px 2px rgba(255,255,255,.35)}
+  .cell.current .name{font-weight:900;font-size:12px}
+  .cell.past .name{font-weight:500}
+  .controls{margin-top:18px}
+  .period-head{display:flex;gap:12px;justify-content:space-between;align-items:flex-end;margin-bottom:10px}
+  .period-title{font-size:22px;font-weight:800}
+  .period-date{font-size:14px;color:var(--muted);text-align:right}
+  input[type=range]{width:100%;accent-color:#25221e}
+  .ticks{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px}
+  .buttons{display:flex;gap:8px;margin-top:12px}
+  button{appearance:none;border:1px solid #bfb7ad;background:#fff;color:#171512;border-radius:10px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer}
+  button:hover{background:#f2eee8} button:disabled{opacity:.35;cursor:not-allowed}
+  .stage-list{display:grid;gap:8px;margin-top:14px}
+  .stage-dot{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:12px}
+  .stage-dot::before{content:"";width:9px;height:9px;border-radius:50%;background:#cfc8be;border:1px solid #aaa197}
+  .stage-dot.active{color:var(--text);font-weight:800}.stage-dot.active::before{background:#222}
+  .info h2{font-size:19px;margin:0 0 8px}.info p{margin:0 0 12px;line-height:1.45}
+  .meta{display:grid;gap:9px}.meta div{border-top:1px solid #e2ddd6;padding-top:8px}
+  .meta b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:2px}
+  .new-list{margin:12px 0 0;padding-left:18px}.new-list li{margin:5px 0;font-weight:800}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:12px}
+  .legend span{display:flex;align-items:center;gap:6px}.key{width:14px;height:14px;border-radius:4px;background:#777;border:1px solid #333}.key.old{opacity:.7}.key.new{box-shadow:0 0 0 2px #222}.key.future{opacity:.15;filter:grayscale(1)}
+  .counter{margin-top:14px;font-size:13px;color:var(--muted)}
+  @media(max-width:900px){.layout{grid-template-columns:1fr}.info{order:-1}.surface{border-radius:14px}.palette{min-width:690px}}
+</style>
+</head>
+<body>
+<main>
+  <h1>História da pintura pela nossa paleta</h1>
+  <p class="sub">Arraste a linha do tempo. As cores novas de cada época aparecem destacadas e em negrito; todas as cores anteriores permanecem visíveis. As futuras ficam apagadas, esperando a química fazer sua parte.</p>
+
+  <div class="layout">
+    <section class="surface">
+      <div class="palette-wrap"><div id="palette" class="palette" aria-label="Paleta de 8 colunas por 10 linhas"></div></div>
+      <div class="controls">
+        <div class="period-head"><div><div id="periodTitle" class="period-title"></div><div id="periodDate" class="period-date" style="text-align:left"></div></div><div id="count" class="period-date"></div></div>
+        <input id="timeline" type="range" min="0" max="15" step="1" value="0" aria-label="Linha do tempo histórica">
+        <div class="ticks"><span>Pré-história</span><span>Antiguidade</span><span>Séc. XIX</span><span>Séc. XX</span><span>1986</span></div>
+        <div class="buttons"><button id="prev" type="button">← Anterior</button><button id="next" type="button">Próxima época →</button><button id="play" type="button">▶ Reproduzir</button></div>
+        <div class="legend"><span><i class="key old"></i>cores anteriores</span><span><i class="key new"></i>cores desta época</span><span><i class="key future"></i>cores futuras</span></div>
+        <div id="stageList" class="stage-list"></div>
+      </div>
+    </section>
+
+    <aside class="surface info" aria-live="polite">
+      <h2 id="infoTitle"></h2>
+      <p id="infoText"></p>
+      <div class="meta">
+        <div><b>Civilizações e lugares</b><span id="civilization"></span></div>
+        <div><b>Artes e suportes</b><span id="arts"></span></div>
+        <div><b>Aglutinantes e técnicas</b><span id="techniques"></span></div>
+      </div>
+      <h2 style="margin-top:18px">Cores que entram agora</h2>
+      <ul id="newColors" class="new-list"></ul>
+      <div id="counter" class="counter"></div>
+    </aside>
+  </div>
+</main>
+<script>
+(function(){
+  'use strict';
+  const stages = [
+    {title:'Pré-história',date:'antes de 100.000 a.C.',civilization:'Povos pré-históricos da África, Europa, Oriente Próximo e Austrália.',arts:'Pintura corporal, rituais funerários, cavernas, abrigos rochosos e objetos móveis.',techniques:'Terras e carvão com água, gordura, gomas e resinas.',text:'A pintura começa com matéria encontrada: ocres, sienas, sombras e carvão. Não havia loja de material artístico, uma falha logística que a humanidade resolveu com pedras.',groups:['earth','carbon']},
+    {title:'Antiguidade mineral',date:'c. 2000–500 a.C.',civilization:'Egito, Mesopotâmia, China e Mediterrâneo antigo.',arts:'Tumbas, sarcófagos, murais, cerâmica, arquitetura, laca e objetos rituais.',techniques:'Afresco, pintura a seco, goma, cola, cera e têmperas antigas.',text:'Surgem pigmentos preparados, como Amarelo de Nápoles, verdete e vermelhão, ligados à arquitetura, ao sagrado e ao funerário.',groups:['naples','verdigris','vermilion']},
+    {title:'Ultramar e pintura medieval',date:'séculos VI–XV',civilization:'Ásia Central budista, mundo islâmico, Bizâncio e Europa medieval.',arts:'Murais de mosteiros, manuscritos iluminados, ícones e painéis religiosos.',techniques:'Têmpera de ovo, goma arábica, afresco e técnicas de manuscrito.',text:'O lápis-lazúli viaja do atual Afeganistão e vira uma matéria de prestígio. O azul passa a ter quase carreira diplomática.',groups:['ultramar']},
+    {title:'Carmim e rotas coloniais',date:'século XVI',civilization:'Mesoamérica, Andes e Europa após a conquista espanhola.',arts:'Têxteis, códices, objetos rituais, retrato e pintura religiosa.',techniques:'Corante transformado em laca, aplicado em têmpera, aquarela e veladuras a óleo.',text:'A cochonilha americana entra no comércio europeu e fornece vermelhos transparentes para tecidos, carne, flores e sombras.',groups:['carmine']},
+    {title:'Azul da Prússia',date:'1704',civilization:'Berlim; depois Europa e Japão.',arts:'Óleo sobre tela, aquarela, gravura ukiyo-e, cartografia e impressão.',techniques:'Pigmento sintético moderno em óleo, goma arábica e tintas de impressão.',text:'O primeiro azul sintético moderno de grande escala altera a pintura europeia e, mais tarde, a gravura japonesa.',groups:['prussian']},
+    {title:'Amarelo Indiano',date:'século XVIII',civilization:'Índia, tradição persa-mogol e Europa.',arts:'Miniatura sobre papel, aquarela e paisagem a óleo.',techniques:'Goma arábica em miniatura e aquarela; veladuras transparentes em óleo.',text:'Um amarelo transparente ligado às miniaturas sul-asiáticas passa à aquarela e à pintura europeia de luz.',groups:['indian']},
+    {title:'Família dos cobaltos',date:'1802–1860',civilization:'França e indústria europeia do século XIX.',arts:'Paisagem romântica, aquarela, marinha, Impressionismo e pintura de cavalete.',techniques:'Óleo sobre tela e aquarela sobre papel.',text:'Cobalto e cerúleo fornecem azuis estáveis para céu, água e atmosfera. A paisagem finalmente ganha um departamento químico.',groups:['cobalt','cerulean']},
+    {title:'Verdes industriais',date:'1814 e século XIX',civilization:'Alemanha, Inglaterra e indústria europeia.',arts:'Paisagem, decoração, papel de parede, ilustração botânica e pintura de interiores.',techniques:'Óleo, aquarela e tintas arquitetônicas.',text:'Verde Esmeralda e misturas chamadas Verde Inglês ampliam a paleta industrial, às vezes com uma toxicidade indecentemente eficiente.',groups:['emerald','english']},
+    {title:'Cádmios e ultramar sintético',date:'1817–1907',civilization:'França, Alemanha e indústria europeia.',arts:'Romantismo, Impressionismo, Pós-Impressionismo, Fauvismo e Expressionismo.',techniques:'Principalmente óleo sobre tela; depois outras tintas artísticas.',text:'Ultramar sintético democratiza o azul. Amarelos e vermelhos de cádmio trazem opacidade e saturação para a pintura moderna.',groups:['cadmiumYellow','cadmiumRed']},
+    {title:'Alizarina sintética',date:'1868',civilization:'Alemanha industrial, com genealogia antiga da garança.',arts:'Retrato, tecidos, flores, sombras e pintura de cavalete.',techniques:'Lacas e veladuras em óleo; também aquarela.',text:'A química industrial sintetiza a alizarina e transforma uma antiga tradição vegetal em produção moderna.',groups:['alizarin']},
+    {title:'Óxidos sintéticos e amarelos permanentes',date:'fim do século XIX–1920',civilization:'Indústria europeia e norte-americana.',arts:'Pintura moderna, design, impressão, decoração e ensino artístico.',techniques:'Óleo, guache, tintas industriais e posteriormente acrílica.',text:'Preto de Marte e amarelos azo estabilizam e padronizam cores que antes variavam muito entre jazidas e receitas.',groups:['mars','permanentYellow']},
+    {title:'Branco de Titânio',date:'1910–1923',civilization:'Noruega, Estados Unidos e França industrial.',arts:'Pintura de cavalete, arquitetura, design e indústria.',techniques:'Óleo, tintas industriais e posteriormente acrílica.',text:'O Branco de Titânio se torna o grande branco moderno: muito opaco, muito forte e completamente incapaz de respeitar uma mistura delicada.',groups:['titanium']},
+    {title:'Ftalocianinas',date:'1927–1938',civilization:'Indústria química britânica e europeia.',arts:'Impressão, automóveis, plásticos, abstração, Pop Art e pintura contemporânea.',techniques:'Óleo, aquarela, guache, acrílica e tintas industriais.',text:'Azul e Verde Ftalo oferecem força tintorial, transparência e estabilidade em níveis quase ofensivos.',groups:['phthaloBlue','phthaloGreen']},
+    {title:'Fluorescentes',date:'década de 1930',civilization:'Estados Unidos, especialmente Califórnia.',arts:'Cenografia, sinalização, cartaz, serigrafia, Pop Art, psicodelia e arte urbana.',techniques:'Tintas industriais, serigrafia e acrílica sobre papel, tela, madeira e parede.',text:'Pigmentos fluorescentes atravessam publicidade, guerra, espetáculo e arte. Nada discreto, como convém.',groups:['fluorescent']},
+    {title:'Dioxazinas, perolados e misturas modernas',date:'1950–1970',civilization:'Indústria química internacional do pós-guerra.',arts:'Abstração, campos de cor, design, automóveis, cosméticos e pintura contemporânea.',techniques:'Óleo, acrílica, impressão e revestimentos industriais.',text:'Violetas profundos, efeitos perolados e cores de conveniência consolidam a paleta industrial do pós-guerra.',groups:['dioxazine','pearl','modernMix']},
+    {title:'Pirrole / DPP',date:'1974–1986',civilization:'Pesquisa química europeia e indústria internacional.',arts:'Pintura automotiva, impressão e tintas artísticas contemporâneas.',techniques:'Óleo, acrílica, aquarela e revestimentos de alta resistência.',text:'Os pigmentos DPP chegam ao mercado em 1986 e entregam vermelhos intensos e permanentes. A linha do tempo finalmente alcança a sua paleta inteira.',groups:['pyrrole']}
+  ];
+
+  const colors = [
+    {pos:'E1',name:'Corfix 70 Azul Real',hex:'#2459a9',label:'#fff',group:'modernMix'},
+    {pos:'C2',name:'Maimeri Classico 253 Rosso Permanente',hex:'#c72532',label:'#fff',group:'pyrrole'},
+    {pos:'E2',name:'Joules & Joules Gel Azul de Cobalto',hex:'#3475be',label:'#fff',group:'cobalt'},
+    {pos:'F2',name:'Corfix 85 Azul Cerúleo',hex:'#4e9bc7',label:'#082536',group:'cerulean'},
+    {pos:'A3',name:'Joules & Joules Rosa Fluorescente',hex:'#ff3c9d',label:'#2c0016',group:'fluorescent'},
+    {pos:'B3',name:'Joules & Joules Vermelho Pirrole',hex:'#df1f2d',label:'#fff',group:'pyrrole'},
+    {pos:'C3',name:'Corfix Vermelho da China',hex:'#d52620',label:'#fff',group:'vermilion'},
+    {pos:'E3',name:'Acrilex 330 Violeta Permanente Escuro',hex:'#3d245f',label:'#fff',group:'dioxazine'},
+    {pos:'F3',name:'Joules & Joules Violeta Dioxazine',hex:'#4c2377',label:'#fff',group:'dioxazine'},
+    {pos:'G3',name:'Joules & Joules Azul Ultramar',hex:'#2745a8',label:'#fff',group:'ultramar'},
+    {pos:'A4',name:'Corfix 1009 Laranja Fluorescente',hex:'#ff6a13',label:'#2c1300',group:'fluorescent'},
+    {pos:'B4',name:'Joules & Joules Amarelo Indiano',hex:'#e5a31b',label:'#2b1700',group:'indian'},
+    {pos:'C4',name:'Corfix 127 Vermelho Cádmio Alaranjado',hex:'#e64b23',label:'#fff',group:'cadmiumRed'},
+    {pos:'D4',name:'Van Gogh Carmine',hex:'#a9273d',label:'#fff',group:'carmine'},
+    {pos:'F4',name:'Joules & Joules Alizarin',hex:'#7f1936',label:'#fff',group:'alizarin'},
+    {pos:'G4',name:'Joules & Joules Azul de Cobalto',hex:'#356bb5',label:'#fff',group:'cobalt'},
+    {pos:'H4',name:'Winton Azul de Ftalo',hex:'#065a83',label:'#fff',group:'phthaloBlue'},
+    {pos:'A5',name:'Corfix 50 Amarelo Claro Permanente',hex:'#f4d43d',label:'#332900',group:'permanentYellow'},
+    {pos:'B5',name:'Winton Cadmium Yellow Deep Hue',hex:'#e6a11f',label:'#2b1800',group:'cadmiumYellow'},
+    {pos:'C5',name:'Winton Cadmium Red Deep Hue',hex:'#b72c28',label:'#fff',group:'cadmiumRed'},
+    {pos:'D5',name:'Corfix 81 Violeta Permanente',hex:'#69408d',label:'#fff',group:'dioxazine'},
+    {pos:'E5',name:'Joules & Joules Violeta Ultramar',hex:'#55419a',label:'#fff',group:'ultramar'},
+    {pos:'F5',name:'Corfix 86 Azul Ftalocianina',hex:'#07547c',label:'#fff',group:'phthaloBlue'},
+    {pos:'G5',name:'Joules & Joules Azul da Prússia',hex:'#123c65',label:'#fff',group:'prussian'},
+    {pos:'A6',name:'Joules & Joules Amarelo Fluorescente',hex:'#f1f637',label:'#303000',group:'fluorescent'},
+    {pos:'B6',name:'Joules & Joules Amarelo de Cádmio',hex:'#f0c21f',label:'#312700',group:'cadmiumYellow'},
+    {pos:'C6',name:'Van Gogh 208 Cadmium Yellow Light',hex:'#f5d22a',label:'#302800',group:'cadmiumYellow'},
+    {pos:'D6',name:'Joules & Joules Laranja Ocre Alterosa',hex:'#c56c2b',label:'#fff',group:'earth'},
+    {pos:'E6',name:'Van Gogh 234 Raw Sienna',hex:'#a86d32',label:'#fff',group:'earth'},
+    {pos:'F6',name:'Joules & Joules Terra de Rio Acima',hex:'#7b5032',label:'#fff',group:'earth'},
+    {pos:'H6',name:'Corfix 121 Preto de Marte',hex:'#1f2021',label:'#fff',group:'mars'},
+    {pos:'A7',name:'Maimeri Classico 131 Ocra Gialla',hex:'#b7832f',label:'#271900',group:'earth'},
+    {pos:'B7',name:'Corfix 53 Amarelo Ocre',hex:'#c59436',label:'#2a1d00',group:'earth'},
+    {pos:'F7',name:'Maimeri 278 Terra di Siena Bruciata',hex:'#8d3f26',label:'#fff',group:'earth'},
+    {pos:'G7',name:"Maimeri 493 Terra d'Ombra Naturale",hex:'#5f4a34',label:'#fff',group:'earth'},
+    {pos:'H7',name:'Van Gogh 701 Ivory Black',hex:'#171819',label:'#fff',group:'carbon'},
+    {pos:'A8',name:'Corfix 49 Amarelo Nápoles Carne',hex:'#e7be7b',label:'#352413',group:'naples'},
+    {pos:'B8',name:'Corfix 76 Amarelo Pele',hex:'#e5aa74',label:'#3a1e0d',group:'modernMix'},
+    {pos:'C8',name:'Joules & Joules Ouro Pérola',hex:'#c7a24b',label:'#2b2009',group:'pearl'},
+    {pos:'F8',name:'Corfix 75 Verde Inglês',hex:'#335c35',label:'#fff',group:'english'},
+    {pos:'G8',name:'Corfix 73 Verde Esmeralda',hex:'#178d5b',label:'#fff',group:'emerald'},
+    {pos:'H8',name:'Joules & Joules Verde Ftalo',hex:'#006e54',label:'#fff',group:'phthaloGreen'},
+    {pos:'F9',name:'Maimeri 339 Verde Permanente Chiaro',hex:'#72a943',label:'#173000',group:'modernMix'},
+    {pos:'G9',name:'Acrilex 322 Verde Musgo',hex:'#586337',label:'#fff',group:'modernMix'},
+    {pos:'H9',name:'Joules & Joules Verdete São Gotardo',hex:'#489b85',label:'#082c24',group:'verdigris'},
+    {pos:'A10',name:'J&J + Van Gogh Branco de Titânio',hex:'#f7f4ea',label:'#28251f',group:'titanium'},
+    {pos:'F10',name:'Corfix 77 Verde Inglês Claro',hex:'#779b57',label:'#18300d',group:'english'},
+    {pos:'G10',name:'Corfix 025 Verde Fluorescente',hex:'#76ee37',label:'#183400',group:'fluorescent'},
+    {pos:'H10',name:'Corfix 72 Verde Veronese',hex:'#43aa70',label:'#0b2d1c',group:'emerald'}
+  ];
+
+  const stageForGroup = {};
+  stages.forEach((s,i)=>s.groups.forEach(g=>stageForGroup[g]=i));
+  const palette = document.getElementById('palette');
+  const cells = [];
+  const cols='ABCDEFGH';
+  for(let row=1;row<=10;row++){
+    for(let col=0;col<8;col++){
+      const pos=cols[col]+row;
+      const item=colors.find(c=>c.pos===pos);
+      const div=document.createElement('div');
+      div.className=item?'cell color':'cell empty';
+      div.dataset.pos=pos;
+      if(item){
+        div.style.setProperty('--swatch',item.hex);div.style.setProperty('--label',item.label);
+        div.innerHTML='<span class="coord">'+pos+'</span><span class="name">'+item.name+'</span>';
+        div.dataset.stage=String(stageForGroup[item.group]);
+        div.title=item.name;
+      }
+      palette.appendChild(div);cells.push(div);
+    }
+  }
+
+  const slider=document.getElementById('timeline'), prev=document.getElementById('prev'), next=document.getElementById('next'), play=document.getElementById('play');
+  let timer=null;
+  function render(index){
+    index=Math.max(0,Math.min(stages.length-1,Number(index))); slider.value=String(index);
+    const s=stages[index];
+    document.getElementById('periodTitle').textContent=s.title;
+    document.getElementById('periodDate').textContent=s.date;
+    document.getElementById('infoTitle').textContent=s.title+' · '+s.date;
+    document.getElementById('infoText').textContent=s.text;
+    document.getElementById('civilization').textContent=s.civilization;
+    document.getElementById('arts').textContent=s.arts;
+    document.getElementById('techniques').textContent=s.techniques;
+    const newOnes=colors.filter(c=>stageForGroup[c.group]===index);
+    const ul=document.getElementById('newColors');ul.innerHTML='';
+    newOnes.forEach(c=>{const li=document.createElement('li');li.textContent=c.name;ul.appendChild(li)});
+    if(!newOnes.length){const li=document.createElement('li');li.textContent='Nenhuma cor nova nesta etapa.';ul.appendChild(li)}
+    let visible=0;
+    cells.forEach(cell=>{
+      if(!cell.classList.contains('color'))return;
+      const st=Number(cell.dataset.stage);
+      cell.classList.remove('future','past','current');
+      if(st>index)cell.classList.add('future'); else if(st===index){cell.classList.add('current');visible++;} else {cell.classList.add('past');visible++;}
+    });
+    document.getElementById('count').textContent=visible+' de '+colors.length+' cores visíveis';
+    document.getElementById('counter').textContent=newOnes.length+' cor(es) entram nesta etapa; '+visible+' já fazem parte da paleta histórica.';
+    prev.disabled=index===0;next.disabled=index===stages.length-1;
+    document.querySelectorAll('.stage-dot').forEach((el,i)=>el.classList.toggle('active',i===index));
+  }
+  const stageList=document.getElementById('stageList');
+  stages.forEach((s,i)=>{const d=document.createElement('div');d.className='stage-dot';d.textContent=(i+1)+'. '+s.title+' — '+s.date;stageList.appendChild(d)});
+  slider.addEventListener('input',()=>render(slider.value));
+  prev.addEventListener('click',()=>render(Number(slider.value)-1));
+  next.addEventListener('click',()=>render(Number(slider.value)+1));
+  play.addEventListener('click',()=>{
+    if(timer){clearInterval(timer);timer=null;play.textContent='▶ Reproduzir';return;}
+    if(Number(slider.value)===stages.length-1)render(0);
+    play.textContent='Ⅱ Pausar';
+    timer=setInterval(()=>{
+      const n=Number(slider.value)+1;
+      if(n>=stages.length){clearInterval(timer);timer=null;play.textContent='▶ Reproduzir';return;}
+      render(n);
+    },1300);
+  });
+  render(0);
+})();
+</script>
+</body>
+</html>
