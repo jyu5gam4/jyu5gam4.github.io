@@ -1,0 +1,945 @@
+<!doctype html>
+<!-- 
+
+**▓
+******▓░▓
+****☽**▓*▓•░░─
+****☽☽••▓•▓*░*••••─
+****•☽•▓▓▓░░*•*••**──
+***•••☽▓▓░░░*•**••***───
+***••••▓☽•▓░░•••*••*****──
+***•*▓••☽▓•░•✦•••͠•͠**********────
+***•*▓▓••▓☽░░***•••*•*̴͠*̴͠◌̴*************─**──
+**••▓▓░▓░☽☽◌̴◌̴▓̴͌◌̸͠✦̴̸͠✦̴̸͗◌̴̸◌̴̸♡͌♡̴♡
+**▓▓▓▓▓░─☽✦✦◌̴◌̴̸◌̴̸͌▓̴͌✦͠◌͗◌͗◌̴̸♡▓̴͌◌̴◌̸
+**▓▓▓▓▓░☽✦✦▓▓✦͌✦̴͠¦¦̴̸͗♡̴̸♡̴͌▓̴͌▓̸▓̸̸▓
+▓▓▓▓▓▓▓*░☽☽✦▓✦▓✦͌◌̴͌͠▓̴̸͠◌̴̸̸̸͗͌¦̴͌¦̴¦̸◌̸◌̸╠▓▓
+▓▓▓*░░✦✦☽✦Alessandra Bergamaschi & Rudá Babau 2026✦✦✦✦◌̴̴͌▓̴̴̸͗͌͌͠▓̴̸͗͌▓̴̸▓̸¦̸╠̸╠╠✦✦▓
+▓░░░░░░░✦▓✦¦◌͌¦͌¦̸¦̴̴͗͠¦̸͌͠¦̸¦̸╠̸╠▓✦✦▓✦▓▓
+✦▓✦¦◌͌▓̸▓̴̸͗▓̴▓̸͠╠̸╠̸✦✦▓✦
+✦▓▓✦¦◌͌▓▓͗▓̴̸͗◌̴╠̸╠▓✦✦
+✦▓✦✦¦̷͗͌▓̸̷͗◌̸̷◌̴╠╠▓̸▓✦✦✦✦▓✦
+✦▓▓✦̷͗¦̸̷͗¦̸▓╠̴◌̴̷◌̷▓▓̸◌̸✦✦▓▓
+✦▓◌̸̷✦̸✦╠╠▓̴▓̴◌̷◌̷◌̸̷✦̷✦▓
+✦✦▓̸✦✦✦✦✦̴✦✦✦̸✦◌̷◌̷▓▓
+✦▓▓╠◌̴◌̴◌̴◌̸✦◌̷▓̷
+✦▓╠▓◌̸̴✦▓▓▓◌̷
+✦✦✦▓̷▓̷̷▓̷̷▓̷̷▓̷̷▓̷̷▓̷▓̸̷▓̸̴̷▓̴̷✦̷◌̷◌̷
+ -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#f4f4f1" id="themeMeta">
+<title> 
+U̵̶̵̵̵͆̈́n̵̶̵̵̵͛͂i̵̶̵̵̵̾͑c̵̶̵̵̵ͧ͗o̵̶̵̵̵ͭ̅d̵̶̵̵̵ͤ͗e̵̶̵̵̵̾̚ B̵̶̵̵̵ͬ̾r̵̶̵̵̵ͧ͆u̵̶̵̵̵ͭ̿s̵̶̵̵̵ͭ̽h̵̶̵̵̵ͧ̓ I̵̶̵̵̵ͭ͐G̵̶̵̵̵ͭ̓ 6̵̶̵̵̵ͮ̈́
+</title>
+<style>
+:root{
+  --bg:#858585;
+  --paper:#d7d7d7;
+  --paper2:#c5c5c5;
+  --ink:#000000;
+  --muted:#111111;
+  --line:#050505;
+  --light:#ffffff;
+  --mid:#7a7a7a;
+  --deep:#000000;
+  --grid:#8a8a8a;
+  --hint:rgba(255,255,255,.9);
+  --safeT:env(safe-area-inset-top);
+  --safeB:env(safe-area-inset-bottom);
+}
+html[data-theme="dark"]{
+  --bg:#121212;
+  --paper:#2b2b2b;
+  --paper2:#1c1c1c;
+  --ink:#ffffff;
+  --muted:#ededed;
+  --line:#ffffff;
+  --light:#ffffff;
+  --mid:#666666;
+  --deep:#000000;
+  --grid:#4d4d4d;
+  --hint:rgba(12,12,12,.9);
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  letter-spacing:.01em;
+}
+body{overscroll-behavior-y:none}
+button,input{font:inherit}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+
+#studio{
+  height:100svh;min-height:620px;display:flex;flex-direction:column;gap:8px;
+  padding:calc(var(--safeT) + 7px) 10px calc(var(--safeB) + 7px);
+  max-width:720px;margin:auto;
+}
+.topbar{height:42px;display:flex;align-items:center;gap:6px;flex:0 0 auto}
+.brand{
+  font-size:17px;font-weight:900;letter-spacing:.06em;margin-right:auto;white-space:nowrap;
+}
+.badge{
+  font-size:11px;color:var(--muted);font-weight:850;white-space:nowrap;letter-spacing:.06em
+}
+
+/* chanfro separado da sombra */
+.ctrl,.brush,.slotPreview,.slotInput,.charItem,.canvasCard,.settingsCard{
+  border-radius:0 !important;
+  border:1px solid var(--deep);
+  box-shadow:
+    inset 1px 1px 0 var(--light),
+    inset -1px -1px 0 var(--deep),
+    4px 4px 0 var(--deep);
+}
+
+.ctrl{
+  height:40px;min-width:40px;
+  background:linear-gradient(180deg,var(--paper),var(--paper2));
+  color:var(--ink);font-weight:850;padding:0 10px;
+  text-transform:uppercase;letter-spacing:.05em;
+}
+.ctrl.dark{
+  background:linear-gradient(180deg,var(--deep),#2d2d2d);
+  color:var(--light);
+  border-color:var(--deep);
+  box-shadow:
+    inset 1px 1px 0 #777777,
+    inset -1px -1px 0 #000000,
+    4px 4px 0 #000000;
+}
+.ctrl.compact{padding:0 8px;font-size:11px}
+.ctrl:active,.brush:active,.slotPreview:active,.charItem:active{
+  transform:translate(2px,2px);
+  box-shadow:
+    inset 1px 1px 0 var(--deep),
+    inset -1px -1px 0 var(--light),
+    2px 2px 0 var(--deep);
+}
+
+.canvasCard{
+  flex:1 1 auto;min-height:180px;position:relative;background:var(--paper);
+  overflow:hidden;
+}
+.canvasScroll{position:absolute;inset:0;overflow:auto;overscroll-behavior:contain;background:var(--paper)}
+#drawCanvas{display:block;width:100%;touch-action:none;background:var(--paper)}
+.canvasHint{
+  position:absolute;left:10px;top:9px;pointer-events:none;font-size:11px;font-weight:800;
+  color:var(--muted);background:var(--hint);padding:4px 6px;border:1px solid var(--deep);
+  letter-spacing:.05em
+}
+.rowCounter{
+  position:absolute;right:9px;top:9px;pointer-events:none;font-size:11px;font-weight:850;
+  color:var(--muted);background:var(--hint);padding:4px 7px;border:1px solid var(--deep);
+  letter-spacing:.05em
+}
+
+.quickbar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;flex:0 0 auto}
+.quickbar .ctrl{min-width:0;padding:0 5px;font-size:11px}
+.palette{flex:0 0 auto;display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:46px;gap:6px}
+.brush{
+  min-width:0;position:relative;
+  background:linear-gradient(180deg,var(--paper),var(--paper2));
+  color:var(--ink);
+  font-family:"SFMono-Regular",Menlo,Monaco,Consolas,monospace;
+  font-size:18px;font-weight:700;overflow:hidden;white-space:nowrap;padding:0 3px
+}
+.brush.selected{
+  background:linear-gradient(180deg,var(--deep),#2b2b2b);
+  color:var(--light);
+  border-color:var(--deep);
+  box-shadow:
+    inset 1px 1px 0 #777777,
+    inset -1px -1px 0 #000000,
+    4px 4px 0 #000000;
+}
+.brush.zalgo{border-style:solid}
+.brush.zalgo::after{
+  content:"Z";position:absolute;right:3px;top:2px;
+  font:900 7px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  opacity:.8
+}
+
+#settings{max-width:720px;margin:0 auto;padding:18px 10px calc(var(--safeB) + 60px)}
+.settingsCard{
+  background:linear-gradient(180deg,var(--paper),var(--paper2));
+  padding:14px;margin-bottom:12px
+}
+h2,h3{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+h2{font-size:21px;margin:0 0 5px}
+h3{font-size:16px;margin:0 0 10px}
+p{font-size:13px;line-height:1.45;color:var(--muted);margin:5px 0 12px}
+code{
+  font-family:"SFMono-Regular",Menlo,Monaco,Consolas,monospace;
+  background:var(--paper2);padding:1px 3px;border:1px solid var(--deep)
+}
+.settingTop{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.settingTop .ctrl{flex:1}
+.ratio{
+  display:flex;gap:7px;margin:9px 0 12px;font-size:11px;font-weight:850;color:var(--muted);
+  align-items:center;flex-wrap:wrap;letter-spacing:.06em
+}
+.ratio span{
+  padding:5px 8px;background:linear-gradient(180deg,var(--paper),var(--paper2));
+  border:1px solid var(--deep);
+  box-shadow:
+    inset 1px 1px 0 var(--light),
+    inset -1px -1px 0 var(--deep),
+    4px 4px 0 var(--deep);
+}
+.slotList{display:grid;gap:7px}
+.slot{
+  display:grid;grid-template-columns:34px 46px 1fr auto;gap:7px;align-items:center;
+  border-top:1px solid var(--deep);padding-top:7px
+}
+.slot:first-child{border-top:0;padding-top:0}
+.slot.zslot{border-left:2px solid var(--deep);padding-left:5px}
+.slotNo{
+  font-size:10px;color:var(--muted);text-align:center;font-weight:850;letter-spacing:.06em
+}
+.slotPreview{
+  height:40px;background:linear-gradient(180deg,var(--paper),var(--paper2));color:var(--ink);
+  font:18px "SFMono-Regular",Menlo,Monaco,Consolas,monospace
+}
+.slotInput{
+  height:40px;padding:0 10px;min-width:0;
+  background:linear-gradient(180deg,#f1f1f1,#dddddd);color:var(--ink);
+  font:14px "SFMono-Regular",Menlo,Monaco,Consolas,monospace;outline:none
+}
+.slotInput:focus{
+  border-color:var(--deep);
+  background:#f7f7f7;
+  box-shadow:
+    inset 2px 2px 0 #787878,
+    inset -2px -2px 0 #ffffff,
+    4px 4px 0 var(--deep);
+}
+html[data-theme="dark"] .slotInput{
+  background:linear-gradient(180deg,#272727,#1f1f1f);
+}
+html[data-theme="dark"] .slotInput:focus{
+  background:#202020;
+  box-shadow:
+    inset 2px 2px 0 #000000,
+    inset -2px -2px 0 #7a7a7a,
+    4px 4px 0 #000000;
+}
+.codeLabel{
+  font:9px/1.2 "SFMono-Regular",Menlo,Monaco,Consolas,monospace;color:var(--muted);max-width:112px;
+  text-align:right;overflow:hidden;text-overflow:ellipsis
+}
+.libraryCats{display:grid;gap:15px}
+.catTitle{
+  font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:6px
+}
+.charGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.charItem{
+  min-width:0;min-height:55px;background:linear-gradient(180deg,var(--paper),var(--paper2));
+  color:var(--ink);padding:5px 3px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px
+}
+.charGlyph{
+  font:19px "SFMono-Regular",Menlo,Monaco,Consolas,monospace;max-width:100%;overflow:hidden
+}
+.charCode{
+  font:8px "SFMono-Regular",Menlo,Monaco,Consolas,monospace;color:var(--muted);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%
+}
+.note{
+  font-size:11px;color:var(--muted);border-left:3px solid var(--deep);padding-left:9px;margin-top:10px
+}
+.toast{
+  position:fixed;left:50%;bottom:calc(var(--safeB) + 14px);transform:translate(-50%,10px);
+  opacity:0;pointer-events:none;background:var(--deep);color:var(--light);
+  border:1px solid var(--deep);
+  box-shadow:
+    inset 1px 1px 0 #777777,
+    inset -1px -1px 0 #000000,
+    4px 4px 0 #000000;
+  padding:9px 13px;
+  font-size:12px;font-weight:850;transition:.16s;z-index:50;white-space:nowrap;
+  text-transform:uppercase;letter-spacing:.06em
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.ctrl[disabled]{
+  opacity:.45;
+  box-shadow:
+    inset 1px 1px 0 var(--light),
+    inset -1px -1px 0 var(--mid),
+    2px 2px 0 var(--mid);
+}
+
+@media(min-width:600px){
+  .palette{grid-template-columns:repeat(8,1fr);grid-auto-rows:46px}
+  .charGrid{grid-template-columns:repeat(6,1fr)}
+}
+</style>
+
+
+</head>
+<body>
+<section id="studio">
+  <div class="topbar">
+    <div class="brand">UNICODE BRUSH</div>
+    <div class="badge" id="colsBadge">45 col</div>
+    <button class="ctrl compact" id="settingsJumpBtn">⚙︎</button>
+    <button class="ctrl compact" id="randomBtn">RND</button>
+    <button class="ctrl compact" id="randomPlusBtn">RND+</button>
+    <button class="ctrl" id="themeBtn">◐</button>
+    <button class="ctrl dark compact" id="copyBtn">Copiar</button>
+  </div>
+
+  <div class="canvasCard">
+    <div class="canvasScroll" id="canvasScroll"><canvas id="drawCanvas"></canvas></div>
+    <div class="canvasHint">arraste para desenhar</div>
+    <div class="rowCounter"><span id="rowsBadge">10</span> linhas</div>
+  </div>
+
+  <div class="quickbar">
+    <button class="ctrl dark" id="modeBtn">OVR</button>
+    <button class="ctrl" id="addRowBtn">+LIN</button>
+    <button class="ctrl" id="addColBtn">+COL</button>
+    <button class="ctrl dark" id="alignBtn">←ALIGN</button>
+    <button class="ctrl" id="gridBtn">GRID</button>
+    <button class="ctrl" id="eraseBtn">ERASE</button>
+    <button class="ctrl" id="clearBtn">CLR</button>
+  </div>
+
+  <div class="palette" id="palette"></div>
+</section>
+
+<section id="settings">
+  <div class="settingsCard">
+    <h2>Configuração dos pincéis</h2>
+    <p>
+      São sempre <b>24 slots</b>: os primeiros <b>16 normais</b> e os últimos <b>8 combining marks</b>.
+      Cada célula guarda <b>base</b> e <b>marks[]</b> separados. Se não houver base, mas houver marks,
+      o programa mostra <b>◌</b> só como suporte visual. Quando depois entra um caractere normal naquela célula,
+      ele vira a base e os marks permanecem. Com <b>←ALIGN</b> ligado, células vazias escorregam para a esquerda;
+      desligado, o desenho vira posicionamento livre e o botão <b>+COL</b> é liberado.
+    </p>
+    <div class="ratio"><span>16 NORMAL</span><span>8 COMBINING</span><span>1/3 ZALGO</span><span>célula = base + marks[]</span></div>
+    <div class="settingTop">
+      <button class="ctrl dark" id="applyBtn">Aplicar</button>
+      <button class="ctrl" id="settingsRandomBtn">Random</button>
+      <button class="ctrl" id="settingsRandomPlusBtn">Random+</button>
+      <button class="ctrl" id="defaultsBtn">Padrão</button>
+      <button class="ctrl" id="backStudioBtn">↑ desenho</button>
+    </div>
+    <div class="slotList" id="slotList"></div>
+  </div>
+
+  <div class="settingsCard">
+    <h3>Curadoria</h3>
+    <p>
+      Toque num item para colocá-lo no slot selecionado. Nos 8 últimos slots, prefira itens de
+      <b>Combining / Zalgo</b>. Eles podem ser digitados diretamente, ou em código como
+      <code>U+0337</code> ou <code>\u0337</code>.
+    </p>
+    <div class="libraryCats" id="library"></div>
+    <div class="note">
+      Random usa a curadoria. Random+ sorteia 16 glifos Unicode imprimíveis e 8 combining marks aleatórios. Isso pode incluir escrita gótica, rúnica, cuneiforme e outros blocos do Unicode, dependendo da renderização da fonte no aparelho.
+      Ao copiar o desenho, células com marks mas sem base saem como <b>◌ + marks</b>, para preservar a aparência no texto final.
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(()=>{
+  const START_COLS=45, START_ROWS=10, PALETTE_SIZE=24, NORMAL_COUNT=16, ZALGO_COUNT=8;
+  const LS={palette:'unicodeBrush.palette.v6', grid:'unicodeBrush.grid.v6', rows:'unicodeBrush.rows.v6', cols:'unicodeBrush.cols.v6', align:'unicodeBrush.align.v6', theme:'unicodeBrush.theme.v6'};
+  const $=s=>document.querySelector(s);
+  const canvas=$('#drawCanvas'), ctx=canvas.getContext('2d'), scroll=$('#canvasScroll');
+  const paletteEl=$('#palette'), slotList=$('#slotList'), libraryEl=$('#library');
+  const rowsBadge=$('#rowsBadge'), colsBadge=$('#colsBadge'), toast=$('#toast'), themeMeta=$('#themeMeta');
+
+  const NORMAL_LIBRARY={
+    'Linhas e caixas':['-','_','|','+','─','━','│','┃','┌','┐','└','┘','├','┤','┬','┴','┼','╭','╮','╰','╯','═','║','╔','╗','╚','╝','╠','╣','╦','╩','╬'],
+    'Diagonais / geometria':['/','\\\\','╱','╲','⟋','⟍','◇','◆','○','●','◉','□','■','△','▲','▽','▼','◜','◝','◞','◟','◢','◣','◤','◥','⬡','⬢','⟡'],
+    'Blocos / ruído':['█','▓','▒','░','▀','▄','▌','▐','▖','▗','▘','▝','▚','▞','⣿','⣀','⣤','⣶','⣷','⣿'],
+    'Estrelas / flores':['*','✦','✧','★','☆','✶','✷','✸','✹','✺','✻','✼','✽','❈','❉','❊','❋','❦','❧','※','⁂','⋆'],
+    'Corações / marcas':['♡','♥','ღ','ෆ','ᥫ᭡','୨୧','ꨄ','❥','☙','♢','♤','♧','♠','♣','♦','𓆩♡𓆪'],
+    'Místicos / ornamentos':['۞','۩','۝','﷽','༒','༺','༻','࿔','࿓','࿊','࿇','☥','☾','☽','☼','☿','♀','♂','⚚','⛧','卍','卐','𓂀','𓆣'],
+    'Separadores':['·','•','‧','⋅','∙','⋆','⁕','⁙','⁝','⁘','⁛','⁜','❖','◈','⟡','⸻','¦','‖','¶','§','†','‡','¤'],
+    'Setas / movimento':['←','→','↑','↓','↔','↕','↖','↗','↘','↙','⇠','⇢','⇡','⇣','➜','➝','➟','➤','➥','↝','↯','⤴','⤵']
+  };
+
+  const COMBINING_LIBRARY={
+    'Combining / Zalgo':[
+      '◌̷','◌̸','◌̴','◌̶','◌̵','◌̲','◌̳','◌̅','◌̿','◌͌','◌͗','◌͠','◌͢','◌̽','◌̚','◌̒',
+      '◌̰','◌̩','◌̥','◌̦','◌͖','◌͙','◌͚','◌̜','◌̹','◌⃝','◌⃞','◌⃠','◌͍','◌͎','◌͓','◌͕'
+    ]
+  };
+
+  const CURATED_NORMAL=Object.values(NORMAL_LIBRARY).flat();
+  const CURATED_COMBINING=Object.values(COMBINING_LIBRARY).flat().map(stripDottedCircle);
+
+  const DEFAULTS=[
+    '*','·','•','─','│','╱','╲','┌','┐','└','┘','█','▓','░','♡','۞',
+    '̷','̸','̴','̿','͌','͗','͠','̰'
+  ];
+
+  let palette=loadPalette(), selected=0, erase=false, addMode=false, showGrid=false;
+  let cols=Math.max(START_COLS, Number(localStorage.getItem(LS.cols))||START_COLS);
+  let rows=Math.max(START_ROWS, Number(localStorage.getItem(LS.rows))||START_ROWS);
+  let alignLeft=(localStorage.getItem(LS.align) ?? '1') !== '0';
+  let cells=loadGrid(rows, cols);
+  let dpr=Math.max(1,Math.min(3,devicePixelRatio||1)),cellW=8,cellH=22,cssW=390,cssH=rows*cellH;
+  let pointerDown=false,lastRaw=null,anims=[],raf=0;
+  const pending=new Set();
+
+  function blankCell(){return {base:'', marks:[]}}
+  function cloneCell(c){return {base:c?.base||'', marks:Array.isArray(c?.marks)?c.marks.slice():[]}}
+  function ensureCell(c){return c && typeof c==='object' ? {base:String(c.base||''), marks:Array.isArray(c.marks)?c.marks.map(String):[]} : blankCell()}
+  function slotKind(i){return i<NORMAL_COUNT?'normal':'zalgo'}
+  function hasBase(c){return !!(c && c.base)}
+  function hasMarks(c){return !!(c && c.marks && c.marks.length)}
+  function isOccupied(c){return hasBase(c) || hasMarks(c)}
+  function renderCellString(c){
+    c=ensureCell(c);
+    if(c.base) return c.base + c.marks.join('');
+    if(c.marks.length) return '◌' + c.marks.join('');
+    return '';
+  }
+
+  function loadPalette(){
+    try{
+      const p=JSON.parse(localStorage.getItem(LS.palette));
+      if(Array.isArray(p) && p.length===PALETTE_SIZE) return p.map(String);
+    }catch(e){}
+    return DEFAULTS.slice();
+  }
+
+  function loadGrid(r,c){
+    try{
+      const saved=JSON.parse(localStorage.getItem(LS.grid));
+      if(Array.isArray(saved)){
+        return Array.from({length:r},(_,y)=>Array.from({length:c},(_,x)=>ensureCell(saved[y]?.[x])));
+      }
+    }catch(e){}
+    return Array.from({length:r},()=>Array.from({length:c},()=>blankCell()));
+  }
+
+  function save(){
+    localStorage.setItem(LS.palette, JSON.stringify(palette));
+    localStorage.setItem(LS.grid, JSON.stringify(cells));
+    localStorage.setItem(LS.rows, String(rows));
+    localStorage.setItem(LS.cols, String(cols));
+    localStorage.setItem(LS.align, alignLeft ? '1' : '0');
+  }
+
+  function updateColsBadge(){ if(colsBadge) colsBadge.textContent=cols+' col'; }
+
+  function stripDottedCircle(s){
+    return (s||'').replace(/\u25CC/g,'');
+  }
+
+  function unicodeCode(s){
+    return [...s].map(ch=>'U+'+ch.codePointAt(0).toString(16).toUpperCase().padStart(4,'0')).join(' ');
+  }
+
+  function decodeInput(raw){
+    let s=(raw||'').trim();
+    if(!s) return '';
+    if(/^(U\+[0-9A-Fa-f]{4,6})(\s+U\+[0-9A-Fa-f]{4,6})*$/.test(s)){
+      return s.split(/\s+/).map(x=>String.fromCodePoint(parseInt(x.slice(2),16))).join('');
+    }
+    if(/^(\\u\{?[0-9A-Fa-f]{4,6}\}?)(\s*\\u\{?[0-9A-Fa-f]{4,6}\}?)*$/.test(s)){
+      return [...s.matchAll(/\\u\{?([0-9A-Fa-f]{4,6})\}?/g)].map(m=>String.fromCodePoint(parseInt(m[1],16))).join('');
+    }
+    return s;
+  }
+
+  function combiningMarks(s){
+    try { return [...s.matchAll(/\p{M}/gu)].map(m=>m[0]); }
+    catch(e){
+      return [...s].filter(ch=>{
+        const cp=ch.codePointAt(0);
+        return (cp>=0x300&&cp<=0x36F)||(cp>=0x1AB0&&cp<=0x1AFF)||(cp>=0x1DC0&&cp<=0x1DFF)||(cp>=0x20D0&&cp<=0x20FF)||(cp>=0xFE20&&cp<=0xFE2F);
+      });
+    }
+  }
+
+  function baseChars(s){
+    try { return [...s].filter(ch=>!/\p{M}/u.test(ch) && ch!=='◌'); }
+    catch(e){ return [...s].filter(ch=>ch!=='◌'); }
+  }
+
+  function normalTokenFromInput(s){
+    const bases=baseChars(s);
+    return bases.length ? bases.join('') : s || '';
+  }
+
+  function markTokenFromInput(s){
+    const marks=combiningMarks(s);
+    if(marks.length) return marks.join('');
+    return stripDottedCircle(s);
+  }
+
+  function previewForSlot(i, val){
+    if(slotKind(i)==='zalgo'){
+      const marks=markTokenFromInput(val);
+      return '◌' + (marks || '');
+    }
+    return normalTokenFromInput(val) || '∅';
+  }
+
+  function renderPalette(){
+    paletteEl.innerHTML='';
+    palette.forEach((g,i)=>{
+      const b=document.createElement('button');
+      b.className='brush '+slotKind(i)+(i===selected&&!erase?' selected':'');
+      b.textContent=previewForSlot(i, g);
+      b.title=`${i+1} · ${slotKind(i).toUpperCase()} · ${unicodeCode(g)}`;
+      b.onclick=()=>{selected=i;erase=false;renderPalette();updateEraseBtn();markSelectedSlot()}
+      paletteEl.appendChild(b);
+    });
+  }
+
+  function renderSlots(){
+    slotList.innerHTML='';
+    palette.forEach((g,i)=>{
+      const row=document.createElement('div');
+      row.className='slot'+(slotKind(i)==='zalgo'?' zslot':'');
+      const no=document.createElement('div');
+      no.className='slotNo'; no.textContent=(slotKind(i)==='zalgo'?'Z ':'')+String(i+1).padStart(2,'0');
+      const prev=document.createElement('button');
+      prev.className='slotPreview'; prev.textContent=previewForSlot(i, g);
+      prev.onclick=()=>{selected=i;renderPalette();markSelectedSlot()}
+      const inp=document.createElement('input');
+      inp.className='slotInput'; inp.value=g; inp.dataset.slot=i;
+      inp.autocapitalize='off'; inp.autocomplete='off'; inp.spellcheck=false;
+      const code=document.createElement('div');
+      code.className='codeLabel'; code.textContent=unicodeCode(g);
+      inp.addEventListener('focus',()=>{selected=i;renderPalette();markSelectedSlot()});
+      inp.addEventListener('input',()=>{
+        const v=decodeInput(inp.value);
+        prev.textContent=previewForSlot(i, v);
+        code.textContent=unicodeCode(v);
+      });
+      row.append(no, prev, inp, code);
+      slotList.appendChild(row);
+    });
+    markSelectedSlot();
+  }
+
+  function markSelectedSlot(){
+    slotList.querySelectorAll('.slot').forEach((el,i)=>{
+      el.style.background=i===selected?'var(--soft)':'transparent';
+    });
+  }
+
+  function renderLibrary(){
+    libraryEl.innerHTML='';
+    const all={...NORMAL_LIBRARY, ...COMBINING_LIBRARY};
+    Object.entries(all).forEach(([name, chars])=>{
+      const wrap=document.createElement('div');
+      const title=document.createElement('div'); title.className='catTitle'; title.textContent=name;
+      const grid=document.createElement('div'); grid.className='charGrid';
+      chars.forEach(ch=>{
+        const b=document.createElement('button'); b.className='charItem';
+        const a=document.createElement('span'); a.className='charGlyph'; a.textContent=ch;
+        const c=document.createElement('span'); c.className='charCode'; c.textContent=unicodeCode(stripDottedCircle(ch));
+        b.append(a,c);
+        b.onclick=()=>{
+          const actual=slotKind(selected)==='zalgo' ? stripDottedCircle(ch) : normalTokenFromInput(ch);
+          const inp=slotList.querySelector(`input[data-slot="${selected}"]`);
+          if(inp){
+            inp.value=actual;
+            inp.dispatchEvent(new Event('input'));
+            inp.focus();
+            inp.setSelectionRange(inp.value.length, inp.value.length);
+          }
+          showToast(`slot ${selected+1}: ${previewForSlot(selected, actual)}`);
+        };
+        grid.appendChild(b);
+      });
+      wrap.append(title, grid); libraryEl.appendChild(wrap);
+    });
+  }
+
+  function sampleUnique(arr, n){
+    const copy=arr.slice(), out=[];
+    while(copy.length && out.length<n){
+      const i=Math.floor(Math.random()*copy.length);
+      out.push(copy.splice(i,1)[0]);
+    }
+    while(out.length<n) out.push(arr[Math.floor(Math.random()*arr.length)]);
+    return out;
+  }
+
+  function applyRandomCurated(){
+    palette=[
+      ...sampleUnique(CURATED_NORMAL, NORMAL_COUNT),
+      ...sampleUnique(CURATED_COMBINING, ZALGO_COUNT)
+    ];
+    selected=0; erase=false; save(); renderPalette(); renderSlots(); updateEraseBtn();
+    showToast('Random: 16 normal + 8 combining');
+  }
+
+  function randomScalar(){
+    while(true){
+      const cp=Math.floor(Math.random()*0x110000);
+      if(cp>=0xD800&&cp<=0xDFFF) continue;
+      try { return String.fromCodePoint(cp); } catch(e){}
+    }
+  }
+
+  function isMark(ch){
+    try { return /^\p{M}$/u.test(ch); }
+    catch(e){
+      const cp=ch.codePointAt(0);
+      return (cp>=0x300&&cp<=0x36F)||(cp>=0x1AB0&&cp<=0x1AFF)||(cp>=0x1DC0&&cp<=0x1DFF)||(cp>=0x20D0&&cp<=0x20FF)||(cp>=0xFE20&&cp<=0xFE2F);
+    }
+  }
+
+  function isPrintableBase(ch){
+    try { return /^[\p{L}\p{N}\p{P}\p{S}]$/u.test(ch) && ch!=='◌'; }
+    catch(e){
+      const cp=ch.codePointAt(0);
+      return cp>=0x21 && cp!==0x7F && !(cp>=0xD800&&cp<=0xDFFF);
+    }
+  }
+
+  function randomPrintableUnicode(){
+    for(let tries=0; tries<6000; tries++){
+      const ch=randomScalar();
+      if(isPrintableBase(ch)) return ch;
+    }
+    return CURATED_NORMAL[Math.floor(Math.random()*CURATED_NORMAL.length)];
+  }
+
+  function randomCombiningMark(){
+    for(let tries=0; tries<10000; tries++){
+      const ch=randomScalar();
+      if(isMark(ch)) return ch;
+    }
+    const fallback=['̷','̸','̴','̶','̿','͌','͗','͠','͢','̽','̚','̒','̰','̩','̥','̦'];
+    return fallback[Math.floor(Math.random()*fallback.length)];
+  }
+
+  function applyRandomPlus(){
+    palette=[
+      ...Array.from({length:NORMAL_COUNT}, ()=>randomPrintableUnicode()),
+      ...Array.from({length:ZALGO_COUNT}, ()=>randomCombiningMark())
+    ];
+    selected=0; erase=false; save(); renderPalette(); renderSlots(); updateEraseBtn();
+    showToast('Random+ Unicode · 1/3 combining');
+  }
+
+  function resizeCanvas(){
+    cssW=scroll.clientWidth;
+    cellW=cssW/cols;
+    cellH=Math.max(18, Math.min(23, cellW*2.25));
+    cssH=rows*cellH;
+    canvas.style.width=cssW+'px'; canvas.style.height=cssH+'px';
+    canvas.width=Math.round(cssW*dpr); canvas.height=Math.round(cssH*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    draw();
+  }
+
+  function fontSize(){ return Math.max(10, Math.min(15, cellW*1.58)); }
+
+  function themeColors(){
+    const s=getComputedStyle(document.documentElement);
+    return {
+      paper:s.getPropertyValue('--paper').trim()||'#fff',
+      ink:s.getPropertyValue('--ink').trim()||'#111',
+      grid:s.getPropertyValue('--grid').trim()||'#eee'
+    };
+  }
+
+  function draw(){
+    const colors=themeColors();
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,cssW,cssH);
+    ctx.fillStyle=colors.paper; ctx.fillRect(0,0,cssW,cssH);
+
+    if(showGrid){
+      ctx.strokeStyle=colors.grid; ctx.lineWidth=.5; ctx.beginPath();
+      for(let x=0;x<=cols;x++){const px=x*cellW; ctx.moveTo(px,0); ctx.lineTo(px,cssH);}
+      for(let y=0;y<=rows;y++){const py=y*cellH; ctx.moveTo(0,py); ctx.lineTo(cssW,py);}
+      ctx.stroke();
+    }
+
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.font=`${fontSize()}px "SFMono-Regular", Menlo, Monaco, Consolas, monospace`;
+    ctx.fillStyle=colors.ink;
+
+    for(let y=0;y<rows;y++){
+      for(let x=0;x<cols;x++){
+        const key=y+':'+x;
+        if(pending.has(key)) continue;
+        const txt=renderCellString(cells[y][x]);
+        if(!txt) continue;
+        ctx.fillText(txt, (x+.5)*cellW, (y+.52)*cellH);
+      }
+    }
+
+    const now=performance.now(); let alive=false;
+    anims.forEach(a=>{
+      const p=Math.min(1, (now-a.t0)/a.dur), eased=1-Math.pow(1-p,3);
+      const x=a.from+(a.to-a.from)*eased;
+      ctx.save(); ctx.globalAlpha=.35+.65*p; ctx.fillStyle=colors.ink;
+      ctx.fillText(a.text, (x+.5)*cellW, (a.row+.52)*cellH);
+      ctx.restore();
+      if(p<1) alive=true; else pending.delete(a.row+':'+a.to);
+    });
+    if(anims.length) anims=anims.filter(a=>(now-a.t0)<a.dur);
+    if(alive) raf=requestAnimationFrame(draw); else raf=0;
+  }
+
+  function nearestLeftOccupied(y,x){
+    for(let i=x-1;i>=0;i--) if(isOccupied(cells[y][i])) return i;
+    return -1;
+  }
+
+  function settleColumn(y, rawX){
+    if(!alignLeft) return rawX;
+    if(isOccupied(cells[y][rawX])) return rawX;
+    const left=nearestLeftOccupied(y, rawX);
+    if(left<0) return 0;
+    const gap=rawX-left-1;
+    return gap>1 ? left+2 : rawX;
+  }
+
+  function shiftRight(y, x){
+    for(let i=cols-1;i>x;i--) cells[y][i]=cloneCell(cells[y][i-1]);
+  }
+
+  function setBasePreserveMarks(cell, baseToken){ cell.base=baseToken; }
+
+  function addMarks(cell, markString){
+    const marks=combiningMarks(markString);
+    if(marks.length) cell.marks.push(...marks);
+  }
+
+  function place(y, rawX, token){
+    if(y<0||y>=rows||rawX<0||rawX>=cols) return;
+    const kind=slotKind(selected);
+
+    if(erase){
+      cells[y][rawX]=blankCell();
+      pending.delete(y+':'+rawX);
+      save(); draw(); return;
+    }
+
+    if(kind==='zalgo'){
+      const rawOcc=isOccupied(cells[y][rawX]);
+      const target=rawOcc ? rawX : settleColumn(y, rawX);
+      addMarks(cells[y][target], token);
+      save();
+      if(target<rawX && !rawOcc){
+        const key=y+':'+target; pending.add(key);
+        anims.push({
+          row:y, from:rawX, to:target, text:'◌'+markTokenFromInput(token), t0:performance.now(),
+          dur:120+Math.min(190, (rawX-target)*9)
+        });
+        if(!raf) raf=requestAnimationFrame(draw);
+      } else draw();
+      return;
+    }
+
+    const baseToken=normalTokenFromInput(token);
+    if(!baseToken) return;
+
+    if(!hasBase(cells[y][rawX]) && hasMarks(cells[y][rawX])){
+      setBasePreserveMarks(cells[y][rawX], baseToken);
+      save(); draw(); return;
+    }
+
+    if(hasBase(cells[y][rawX])){
+      if(addMode) shiftRight(y, rawX);
+      setBasePreserveMarks(cells[y][rawX], baseToken);
+      save(); draw(); return;
+    }
+
+    const rawOcc=isOccupied(cells[y][rawX]);
+    const target=rawOcc ? rawX : settleColumn(y, rawX);
+
+    if(hasBase(cells[y][target])){
+      if(addMode) shiftRight(y, target);
+      setBasePreserveMarks(cells[y][target], baseToken);
+      save(); draw(); return;
+    }
+
+    setBasePreserveMarks(cells[y][target], baseToken);
+    save();
+
+    if(target<rawX && !rawOcc){
+      const key=y+':'+target; pending.add(key);
+      anims.push({
+        row:y, from:rawX, to:target, text:baseToken, t0:performance.now(),
+        dur:120+Math.min(190, (rawX-target)*9)
+      });
+      if(!raf) raf=requestAnimationFrame(draw);
+    } else draw();
+  }
+
+  function bresenham(a,b){
+    const pts=[]; let x0=a.x,y0=a.y,x1=b.x,y1=b.y;
+    let dx=Math.abs(x1-x0), sx=x0<x1?1:-1, dy=-Math.abs(y1-y0), sy=y0<y1?1:-1, err=dx+dy;
+    while(true){
+      pts.push({x:x0,y:y0});
+      if(x0===x1 && y0===y1) break;
+      const e2=2*err; if(e2>=dy){err+=dy;x0+=sx;} if(e2<=dx){err+=dx;y0+=sy;}
+    }
+    return pts;
+  }
+
+  function eventCell(e){
+    const r=canvas.getBoundingClientRect();
+    const x=Math.max(0, Math.min(cols-1, Math.floor((e.clientX-r.left)/cellW)));
+    const y=Math.max(0, Math.min(rows-1, Math.floor((e.clientY-r.top)/cellH)));
+    return {x,y};
+  }
+
+  function autoScroll(e){
+    const r=scroll.getBoundingClientRect(), edge=35;
+    if(e.clientY<r.top+edge) scroll.scrollTop=Math.max(0, scroll.scrollTop-8);
+    else if(e.clientY>r.bottom-edge) scroll.scrollTop=Math.min(scroll.scrollHeight-scroll.clientHeight, scroll.scrollTop+8);
+  }
+
+  canvas.addEventListener('pointerdown', e=>{
+    e.preventDefault(); pointerDown=true; canvas.setPointerCapture(e.pointerId);
+    lastRaw=eventCell(e); place(lastRaw.y, lastRaw.x, palette[selected]);
+  });
+  canvas.addEventListener('pointermove', e=>{
+    if(!pointerDown) return;
+    e.preventDefault(); autoScroll(e);
+    const p=eventCell(e);
+    if(p.x===lastRaw.x && p.y===lastRaw.y) return;
+    bresenham(lastRaw, p).slice(1).forEach(q=>place(q.y, q.x, palette[selected]));
+    lastRaw=p;
+  });
+  const endPointer=e=>{
+    pointerDown=false; lastRaw=null;
+    try{canvas.releasePointerCapture(e.pointerId)}catch(_){}
+  };
+  canvas.addEventListener('pointerup', endPointer);
+  canvas.addEventListener('pointercancel', endPointer);
+
+  function updateEraseBtn(){
+    $('#eraseBtn').classList.toggle('dark', erase);
+    if(erase) paletteEl.querySelectorAll('.brush').forEach(b=>b.classList.remove('selected'));
+  }
+
+  function updateAlignUI(){
+    const btn=$('#alignBtn');
+    const addCol=$('#addColBtn');
+    if(btn){
+      btn.textContent=alignLeft ? '←ALIGN' : 'FREE';
+      btn.classList.toggle('dark', alignLeft);
+      btn.title=alignLeft ? 'Alinhar à esquerda ligado' : 'Alinhar à esquerda desligado';
+    }
+    if(addCol){
+      addCol.disabled = alignLeft;
+      addCol.title = alignLeft ? 'Desligue ←ALIGN para adicionar colunas' : 'Adicionar coluna';
+    }
+    updateColsBadge();
+  }
+
+  function setTheme(theme){
+    document.documentElement.dataset.theme=theme;
+    localStorage.setItem(LS.theme, theme);
+    themeMeta.setAttribute('content', theme==='dark' ? '#090909' : '#f4f4f1');
+    $('#themeBtn').textContent=theme==='dark' ? '☀' : '◐';
+    draw();
+  }
+
+  const initialTheme=localStorage.getItem(LS.theme) || 'light';
+  setTheme(initialTheme);
+
+  $('#themeBtn').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
+  $('#randomBtn').onclick=applyRandomCurated;
+  $('#randomPlusBtn').onclick=applyRandomPlus;
+  $('#settingsRandomBtn').onclick=applyRandomCurated;
+  $('#settingsRandomPlusBtn').onclick=applyRandomPlus;
+  $('#settingsJumpBtn').onclick=()=>$('#settings').scrollIntoView({behavior:'smooth'});
+  $('#backStudioBtn').onclick=()=>$('#studio').scrollIntoView({behavior:'smooth'});
+
+  $('#eraseBtn').onclick=()=>{erase=!erase; renderPalette(); updateEraseBtn();};
+  $('#modeBtn').onclick=()=>{
+    addMode=!addMode;
+    $('#modeBtn').textContent=addMode?'ADD':'OVR';
+    $('#modeBtn').classList.toggle('dark', !addMode);
+    showToast(addMode?'ADD: empurra à direita':'OVR: substitui');
+  };
+  $('#gridBtn').onclick=()=>{showGrid=!showGrid; $('#gridBtn').classList.toggle('dark', showGrid); draw();};
+  $('#addRowBtn').onclick=()=>{
+    rows++; cells.push(Array.from({length:cols}, ()=>blankCell())); rowsBadge.textContent=rows; save(); resizeCanvas();
+    requestAnimationFrame(()=>scroll.scrollTo({top:scroll.scrollHeight, behavior:'smooth'}));
+  };
+  $('#addColBtn').onclick=()=>{
+    if(alignLeft){ showToast('Desligue ←ALIGN para adicionar colunas'); return; }
+    cols++;
+    cells.forEach(row=>row.push(blankCell()));
+    save(); updateAlignUI(); resizeCanvas();
+    showToast('Coluna adicionada');
+  };
+  $('#alignBtn').onclick=()=>{
+    alignLeft=!alignLeft;
+    save(); updateAlignUI();
+    showToast(alignLeft ? 'Alinhar à esquerda ligado' : 'Alinhar à esquerda desligado');
+  };
+  $('#clearBtn').onclick=()=>{
+    if(!confirm('Apagar o desenho inteiro?')) return;
+    cells=Array.from({length:rows}, ()=>Array.from({length:cols}, ()=>blankCell()));
+    anims=[]; pending.clear(); save(); draw();
+  };
+  $('#copyBtn').onclick=async()=>{
+    const text=cells.map(row=>{
+      const line=row.map(c=>renderCellString(c)).join('');
+      return line.replace(/\s+$/,'');
+    }).join('\n');
+    try { await navigator.clipboard.writeText(text); }
+    catch(e){
+      const ta=document.createElement('textarea');
+      ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    }
+    showToast('Copiado');
+  };
+
+  $('#applyBtn').onclick=()=>{
+    const vals=[...slotList.querySelectorAll('.slotInput')].map((i, idx)=>{
+      const v=decodeInput(i.value);
+      return slotKind(idx)==='zalgo' ? markTokenFromInput(v) : normalTokenFromInput(v);
+    });
+    palette=vals.map((v,i)=>v||DEFAULTS[i]);
+    localStorage.setItem(LS.palette, JSON.stringify(palette));
+    renderPalette(); renderSlots(); showToast('24 pincéis atualizados');
+  };
+
+  $('#defaultsBtn').onclick=()=>{
+    palette=DEFAULTS.slice();
+    localStorage.setItem(LS.palette, JSON.stringify(palette));
+    selected=0; erase=false; renderPalette(); renderSlots(); updateEraseBtn(); showToast('Curadoria restaurada');
+  };
+
+  function showToast(msg){
+    toast.textContent=msg; toast.classList.add('show');
+    clearTimeout(showToast.t); showToast.t=setTimeout(()=>toast.classList.remove('show'), 1150);
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  window.visualViewport?.addEventListener('resize', resizeCanvas);
+
+  rowsBadge.textContent=rows;
+  updateColsBadge();
+  renderPalette(); renderSlots(); renderLibrary(); updateAlignUI(); resizeCanvas();
+})();
+</script>
+</body>
+</html>
